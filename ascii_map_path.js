@@ -3,6 +3,8 @@ util = require('./ascii_map_util');
 const mapPath = (path) => {
 
     const letters = [];
+    const usedLetters = new Set();
+
     let position = util.findStartingPoint(path);
 
     let direction = '';
@@ -12,8 +14,10 @@ const mapPath = (path) => {
     while (cellValue !== 'x') {
 
         pathAsChars += cellValue;
-        if (/^[A-Z]$/i.test(cellValue)) {
+
+        if (/^[A-Z]$/i.test(cellValue) && !usedLetters.has(position.row.toString() + position.column.toString())) {
             letters.push(cellValue);
+            usedLetters.add(position.row.toString() + position.column.toString())
         }
 
         direction = util.findDirection(position, direction, path);
