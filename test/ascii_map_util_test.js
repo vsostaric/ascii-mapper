@@ -89,10 +89,23 @@ testFindDirection(testInput.testPath1, testPosition = {
     column: 8
 }, 'D', expected = "L");
 
+testFindDirection(testInput.testPath2, testPosition = {
+    row: 2,
+    column: 0
+}, 'D', expected = "D");
+
 testMove(testPosition = {
     row: 2,
     column: 2
 }, testDirection = 'R', expected = {
     row: 2,
     column: 3
+});
+
+testMove(testPosition = {
+    row: 2,
+    column: 0
+}, testDirection = 'D', expected = {
+    row: 3,
+    column: 0
 });

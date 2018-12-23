@@ -45,4 +45,4 @@ module.exports = {
         letters: ['B', 'E', 'E', 'F', 'C', 'A', 'K', 'E'],
         pathAsChars: '@---+B||E--+|E|+--F--+|C|||A--|-----K|||+--E--Ex'
     }
-}
+};

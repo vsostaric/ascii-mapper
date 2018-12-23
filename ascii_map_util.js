@@ -34,17 +34,21 @@ const scanForNewDirection = (position, direction, path) => {
         directionsToScan.add('R');
     }
 
+    let newDirection;
+
     for (let scan of directionsToScan) {
         if (scan === 'U' && path[position.row - 1][position.column] === '|') {
-            return 'U';
+            newDirection =  'U';
         } else if (scan === 'D' && path[position.row + 1][position.column] === '|') {
-            return 'D';
+            newDirection = 'D';
         } else if (scan === 'L' && path[position.row][position.column - 1] === '-') {
-            return 'L';
+            newDirection = 'L';
         } else if (scan === 'R' && path[position.row][position.column + 1] === '-') {
-            return 'R';
+            newDirection = 'R';
         }
     }
+
+    return newDirection;
 
 };
 
@@ -63,23 +67,23 @@ const move = (position, direction) => {
 
     if (direction === 'L') {
         return {
-            ...position,
+            row: position.row,
             column: position.column - 1
         }
     } else if (direction === 'R') {
         return {
-            ...position,
+            row: position.row,
             column: position.column + 1
         }
     } else if (direction === 'U') {
         return {
-            ...position,
-            row: position.row - 1
+            row: position.row - 1,
+            column: position.column
         }
     } else if (direction === 'D') {
         return {
-            ...position,
-            row: position.row + 1
+            row: position.row + 1,
+            column: position.column
         }
     }
 
