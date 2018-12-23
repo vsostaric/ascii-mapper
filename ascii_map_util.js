@@ -15,36 +15,50 @@ const findStartingPoint = (path) => {
 };
 
 const scanForNewDirection = (position, direction, path) => {
-    const directionsToScan = new Set();
+    const directionsToScan = [];
 
 
     if (direction !== 'D' && position.row > 0) {
-        directionsToScan.add('U');
+        directionsToScan.push('U');
     }
 
-    if (direction !== 'U' && position.row < path.length-1) {
-        directionsToScan.add('D');
+    if (direction !== 'U' && position.row < path.length - 1) {
+        directionsToScan.push('D');
     }
 
     if (direction !== 'R' && position.column > 0) {
-        directionsToScan.add('L');
+        directionsToScan.push('L');
     }
 
-    if (direction !== 'L' && position.column < path[0].length-1) {
-        directionsToScan.add('R');
+    if (direction !== 'L' && position.column < path[0].length - 1) {
+        directionsToScan.push('R');
     }
 
     let newDirection;
 
+    const indexOfCurrentDirection = directionsToScan.indexOf(direction);
+    if (indexOfCurrentDirection !== -1) {
+        directionsToScan.slice(indexOfCurrentDirection);
+        directionsToScan.unshift(direction);
+    }
+
     for (let scan of directionsToScan) {
-        if (scan === 'U' && path[position.row - 1][position.column] === '|') {
-            newDirection =  'U';
-        } else if (scan === 'D' && path[position.row + 1][position.column] === '|') {
+        if (scan === 'U' &&
+            (path[position.row - 1][position.column] === '|' || /^[A-Z+]$/i.test(path[position.row - 1][position.column]))) {
+            newDirection = 'U';
+            break;
+        } else if (scan === 'D' &&
+            (path[position.row + 1][position.column] === '|' || /^[A-Z+]$/i.test(path[position.row + 1][position.column]))) {
             newDirection = 'D';
-        } else if (scan === 'L' && path[position.row][position.column - 1] === '-') {
+            break;
+        } else if (scan === 'L' &&
+            (path[position.row][position.column - 1] === '-' || /^[A-Z+]$/i.test(path[position.row][position.column - 1]))) {
             newDirection = 'L';
-        } else if (scan === 'R' && path[position.row][position.column + 1] === '-') {
+            break;
+        } else if (scan === 'R' &&
+            (path[position.row][position.column + 1] === '-' || /^[A-Z+]$/i.test(path[position.row][position.column + 1]))) {
             newDirection = 'R';
+            break;
         }
     }
 
