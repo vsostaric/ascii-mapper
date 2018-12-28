@@ -4,51 +4,53 @@ testInput = require('./test_input');
 const testFindStartingPoint = (testPath, expected) => {
 
     console.log('Testing findStartingPoint');
+    console.log('Input path: ');
+    console.log(testPath);
     const startingPoint = mapperUtil.findStartingPoint(testPath);
+    console.log(`Result: [${startingPoint.row}, ${startingPoint.column}]`);
     if (startingPoint.row === expected.row && startingPoint.column === expected.column) {
         console.log('Test passed');
     } else {
-        console.log('Test failed');
-        console.log('Input path: ');
-        console.log(testPath);
-        console.log(`Result: ${startingPoint}`);
         console.log(`Expected: ${expected}`);
+        console.log('Test failed');
 
     }
+    console.log('\n');
 };
 
 const testFindDirection = (testPath, testPosition, testDirection, expected) => {
     console.log('Testing findDirection');
+    console.log('Input path: ');
+    console.log(testPath);
+    console.log('Input position: ');
+    console.log(testPosition);
     const direction = mapperUtil.findDirection(testPosition, testDirection, testPath);
+    console.log(`Result: ${direction}`);
     if (direction === expected) {
         console.log('Test passed');
     } else {
-        console.log('Test failed');
-        console.log('Input path: ');
-        console.log(testPath);
-        console.log('Input position: ');
-        console.log(testPosition);
-        console.log(`Result: ${direction}`);
         console.log(`Expected: ${expected}`);
-
+        console.log('Test failed');
     }
+    console.log('\n');
 };
 
 const testMove = (testPosition, testDirection, expected) => {
     console.log('Testing move');
+    console.log('Input position: ');
+    console.log(testPosition);
+    console.log('Input direction: ');
+    console.log(testDirection);
     const newPosition = mapperUtil.move(testPosition, testDirection);
+    console.log(`Result: [${newPosition.row}, ${newPosition.column}]`);
     if (newPosition.row === expected.row && newPosition.column === expected.column) {
         console.log('Test passed');
     } else {
-        console.log('Test failed');
-        console.log('Input position: ');
-        console.log(testPosition);
-        console.log('Input direction: ');
-        console.log(testDirection);
-        console.log(`Result: ${newPosition}`);
         console.log(`Expected: ${expected}`);
+        console.log('Test failed');
 
     }
+    console.log('\n');
 };
 
 testFindStartingPoint(testInput.testPath1, expected = {
