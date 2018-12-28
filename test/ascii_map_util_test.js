@@ -13,7 +13,6 @@ const testFindStartingPoint = (testPath, expected) => {
     } else {
         console.log(`Expected: ${expected}`);
         console.log('Test failed');
-
     }
     console.log('\n');
 };
@@ -53,55 +52,59 @@ const testMove = (testPosition, testDirection, expected) => {
     console.log('\n');
 };
 
-testFindStartingPoint(testInput.testPath1, expected = {
+const testPath1 = testInput.testPath1.map(row => row.split(''));
+const testPath2 = testInput.testPath2.map(row => row.split(''));
+const testPath3 = testInput.testPath3.map(row => row.split(''));
+
+testFindStartingPoint(testPath1, expected = {
     row: 0,
     column: 0
 });
-testFindStartingPoint(testInput.testPath2, expected = {
+testFindStartingPoint(testPath2, expected = {
     row: 0,
     column: 0
 });
-testFindStartingPoint(testInput.testPath3, expected = {
+testFindStartingPoint(testPath3, expected = {
     row: 0,
     column: 2
 });
 
-testFindDirection(testInput.testPath1, testPosition = {
+testFindDirection(testPath1, testPosition = {
     row: 0,
     column: 0
 }, '', expected = "R");
 
-testFindDirection(testInput.testPath1, testPosition = {
+testFindDirection(testPath1, testPosition = {
     row: 0,
     column: 1
 }, 'R', expected = "R");
 
-testFindDirection(testInput.testPath1, testPosition = {
+testFindDirection(testPath1, testPosition = {
     row: 0,
     column: 4
 }, 'R', expected = "R");
 
-testFindDirection(testInput.testPath1, testPosition = {
+testFindDirection(testPath1, testPosition = {
     row: 2,
     column: 1
 }, 'L', expected = "L");
 
-testFindDirection(testInput.testPath1, testPosition = {
+testFindDirection(testPath1, testPosition = {
     row: 4,
     column: 8
 }, 'D', expected = "L");
 
-testFindDirection(testInput.testPath2, testPosition = {
+testFindDirection(testPath2, testPosition = {
     row: 2,
     column: 0
 }, 'D', expected = "D");
 
-testFindDirection(testInput.testPath3, testPosition = {
+testFindDirection(testPath3, testPosition = {
     row: 6,
     column: 3
 }, 'D', expected = "D");
 
-testFindDirection(testInput.testPath3, testPosition = {
+testFindDirection(testPath3, testPosition = {
     row: 6,
     column: 3
 }, 'R', expected = "R");
