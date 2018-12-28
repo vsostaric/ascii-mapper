@@ -2,6 +2,8 @@ util = require('./ascii_map_util');
 
 const mapPath = (path) => {
 
+    path = path.map(row => row.split(''));
+
     const letters = [];
     const usedLetters = new Set();
 
