@@ -36,12 +36,6 @@ const scanForNewDirection = (position, direction, path) => {
 
     let newDirection;
 
-    const indexOfCurrentDirection = directionsToScan.indexOf(direction);
-    if (indexOfCurrentDirection !== -1) {
-        directionsToScan.slice(indexOfCurrentDirection);
-        directionsToScan.unshift(direction);
-    }
-
     for (let scan of directionsToScan) {
         if (scan === 'U' &&
             (path[position.row - 1][position.column] === '|' || /^[A-Z+]$/i.test(path[position.row - 1][position.column]))) {
@@ -64,17 +58,6 @@ const scanForNewDirection = (position, direction, path) => {
 
     return newDirection;
 
-};
-
-const findDirection = (position, direction, path) => {
-
-    const directions = new Set(['-', '|']);
-
-    if (!directions.has(path[position.row][position.column])) {
-        direction = scanForNewDirection(position, direction, path);
-    }
-
-    return direction;
 };
 
 const move = (position, direction) => {
@@ -101,6 +84,30 @@ const move = (position, direction) => {
         }
     }
 
+};
+
+const isPositionValid = (position, path) => {
+    return (position.row >= 0 && position.row < path.length) && (position.column >= 0 && position.column < path[0].length);
+};
+
+const isPositionOnPath = (position, path) => {
+    return path[position.row][position.column] !== ' ';
+};
+
+const canKeepCurrentDirection = (position, direction, path) => {
+
+    const newPosition = move(position, direction);
+    return isPositionValid(newPosition, path) && isPositionOnPath(newPosition, path);
+
+};
+
+const findDirection = (position, direction, path) => {
+
+    if (direction === '' || !canKeepCurrentDirection(position, direction, path)) {
+        direction = scanForNewDirection(position, direction, path);
+    }
+
+    return direction;
 };
 
 module.exports = {
