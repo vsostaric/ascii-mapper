@@ -37,21 +37,8 @@ const scanForNewDirection = (position, direction, path) => {
     let newDirection;
 
     for (let scan of directionsToScan) {
-        if (scan === 'U' &&
-            (path[position.row - 1][position.column] === '|' || /^[A-Z+]$/i.test(path[position.row - 1][position.column]))) {
-            newDirection = 'U';
-            break;
-        } else if (scan === 'D' &&
-            (path[position.row + 1][position.column] === '|' || /^[A-Z+]$/i.test(path[position.row + 1][position.column]))) {
-            newDirection = 'D';
-            break;
-        } else if (scan === 'L' &&
-            (path[position.row][position.column - 1] === '-' || /^[A-Z+]$/i.test(path[position.row][position.column - 1]))) {
-            newDirection = 'L';
-            break;
-        } else if (scan === 'R' &&
-            (path[position.row][position.column + 1] === '-' || /^[A-Z+]$/i.test(path[position.row][position.column + 1]))) {
-            newDirection = 'R';
+        if (isPositionOnPath(move(position, scan), path)) {
+            newDirection = scan;
             break;
         }
     }
@@ -62,26 +49,22 @@ const scanForNewDirection = (position, direction, path) => {
 
 const move = (position, direction) => {
 
+    let newRow = position.row;
+    let newColumn = position.column;
+
     if (direction === 'L') {
-        return {
-            row: position.row,
-            column: position.column - 1
-        }
+        newColumn = position.column - 1;
     } else if (direction === 'R') {
-        return {
-            row: position.row,
-            column: position.column + 1
-        }
+        newColumn = position.column + 1;
     } else if (direction === 'U') {
-        return {
-            row: position.row - 1,
-            column: position.column
-        }
+        newRow = position.row - 1;
     } else if (direction === 'D') {
-        return {
-            row: position.row + 1,
-            column: position.column
-        }
+        newRow = position.row + 1;
+    }
+
+    return {
+        row: newRow,
+        column: newColumn
     }
 
 };
