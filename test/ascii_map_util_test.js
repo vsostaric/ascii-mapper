@@ -23,6 +23,8 @@ const testFindDirection = (testPath, testPosition, testDirection, expected) => {
     console.log(testPath);
     console.log('Input position: ');
     console.log(testPosition);
+    console.log('Input direction: ');
+    console.log(testDirection);
     const direction = mapperUtil.findDirection(testPosition, testDirection, testPath);
     console.log(`Result: ${direction}`);
     if (direction === expected) {
